@@ -1,6 +1,4 @@
-﻿@using MvcMusicStoreMyTrial.Models
-
-@model IEnumerable<Genre>
+﻿@model IEnumerable<MvcMusicStoreMyTrial.Models.Genre>
 
 @{
     ViewBag.Title = "Store";
@@ -13,7 +11,7 @@
 </p>
 
 <ul>
-    @foreach (Genre genre in Model)
+    @foreach (var genre in Model)
     {
         <li>@Html.ActionLink(genre.Name, "Browse", new { genre = genre.Name })</li>
     }

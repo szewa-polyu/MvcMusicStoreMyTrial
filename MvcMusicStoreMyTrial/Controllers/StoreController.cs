@@ -10,35 +10,29 @@ namespace MvcMusicStoreMyTrial.Controllers
 {
     public class StoreController : Controller
     {
+        private MusicStoreEntities storeDB = new MusicStoreEntities();
+
+
         // GET: Store
         public ActionResult Index()
         {
-            IList genres = new List<Genre>()
-            {
-                new Genre { Name = "Disco"},
-                new Genre { Name = "Jazz"},
-                new Genre { Name = "Rock"}
-            };
+            IEnumerable<Genre> genres = storeDB.Genres.ToList();
             return View(genres);
         }
 
         // GET: Store/Browse
         public ActionResult Browse(string genre)
         {
-            Genre genreModel = new Genre
-            {
-                Name = genre
-            };
+            // Retrieve Genre and its Associated Albums from database
+            Genre genreModel = storeDB.Genres.Include("Albums")
+                .Single(g => g.Name == genre);
             return View(genreModel);
         }
 
         // GET: Store/Details
         public ActionResult Details(int id)
         {
-            Album album = new Album
-            {
-                Title = "Album " + id
-            };
+            Album album = storeDB.Albums.Find(id);
             return View(album);
         }
     }
