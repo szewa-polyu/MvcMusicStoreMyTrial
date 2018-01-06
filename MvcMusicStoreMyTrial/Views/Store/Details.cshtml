@@ -1,4 +1,6 @@
-﻿@model MvcMusicStoreMyTrial.Models.Album
+﻿@using MvcMusicStoreMyTrial.Extensions;
+
+@model MvcMusicStoreMyTrial.Models.Album
 
 @{
     ViewBag.Title = "Album - " + Model.Title;
@@ -7,7 +9,7 @@
 <h2>@Model.Title</h2>
 <p>
     <img alt="@Model.Title"
-         src="@Url.Content(Model.AlbumArtUrl)" />
+         src='@Url.Content("~" + Model.AlbumArtUrl)' />
 </p>
 <div id="album-details">
     <p>
